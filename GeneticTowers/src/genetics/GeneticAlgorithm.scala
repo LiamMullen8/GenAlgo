@@ -26,6 +26,7 @@ object GeneticAlgorithm {
     def ELITE(population: List[List[Double]]): List[List[Double]] = {
       population.sortBy(x => costFunction(incubator(x))).take(74) //take top 74 / 300
     }
+    
     def mutate(animal: List[Double]): List[Double] = {
       val r = new Random
       val rand: Double = -100 + (100 - (-100)) * r.nextDouble()
@@ -34,11 +35,11 @@ object GeneticAlgorithm {
         if (20 < gene - rand && gene - rand < 40) { //arbitrary range for mutation
           -100 + (100 - (-100)) * r.nextDouble() //mutate to value in range for extra randomness :)
         }
-        else {gene
-        }
+        else { gene }
       })
       mutatedGenes
     }
+    
     def crossover(parent1: List[Double], parent2: List[Double]): List[Double] = {
       val offspring = (for( i <- parent1.indices) yield {
         if(i % 2 == 0){
@@ -77,8 +78,9 @@ object GeneticAlgorithm {
       else {
         incubator(BEST_ANIMAL)
       }
-    }
+    } 
+    
     RECURSE(incubator,costFunction,numberOfGenes,Population,1)
   }
-
+  
 }
